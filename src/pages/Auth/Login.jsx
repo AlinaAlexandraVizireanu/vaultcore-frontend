@@ -32,11 +32,11 @@ export default function Login() {
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput
-          label="Username"
-          name="username"
+          label="Email"
+          name="email"
           register={register}
-          required={{ value: true, message: "Username is required" }}
-          error={errors.username}
+          required={{ value: true, message: "Email is required" }}
+          error={errors.email}
         />
         <PasswordInput
           label="Password"
