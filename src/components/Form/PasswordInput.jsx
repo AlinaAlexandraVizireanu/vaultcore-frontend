@@ -1,6 +1,6 @@
 import TextField from "@mui/material/TextField";
 
-export default function PasswordInput({ label, name, register, required, error }) {
+export default function PasswordInput({ label, name, register, required, validate,  error }) {
   return (
     <TextField
       label={label}
@@ -8,7 +8,7 @@ export default function PasswordInput({ label, name, register, required, error }
       variant="outlined"
       fullWidth
       margin="normal"
-      {...register(name, { required })}
+      {...register(name, { required, validate })}
       error={!!error}
       helperText={error ? error.message : ""}
     />
