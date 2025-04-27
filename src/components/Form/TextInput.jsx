@@ -1,8 +1,16 @@
 import TextField from "@mui/material/TextField";
 
-export default function TextInput({ label, name, register, required, error }) {
+export default function TextInput({
+  type,
+  label,
+  name,
+  register,
+  required,
+  error,
+}) {
   return (
     <TextField
+      type={type}
       label={label}
       variant="outlined"
       fullWidth

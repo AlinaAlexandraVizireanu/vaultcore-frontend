@@ -4,6 +4,7 @@ import PasswordInput from "../../components/Form/PasswordInput";
 import SubmitButton from "../../components/Form/SubmitButton";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 export default function Login() {
   const {
@@ -12,9 +13,24 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Login data:", data);
-    // Handle login logic here
+  const onSubmit = async (data) => {
+    console.log("Logging in...", data);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email: data.email,
+          password: data.password,
+        }
+      );
+      console.log("Login Success:", response.data);
+    } catch (error) {
+      console.error(
+        "Login failed:",
+        error.response?.data?.message || error.message
+      );
+    }
   };
 
   return (

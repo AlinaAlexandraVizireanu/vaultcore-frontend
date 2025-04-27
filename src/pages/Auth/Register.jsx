@@ -4,6 +4,7 @@ import PasswordInput from "../../components/Form/PasswordInput";
 import SubmitButton from "../../components/Form/SubmitButton";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 function Register() {
   const {
@@ -15,9 +16,26 @@ function Register() {
 
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log("Register data:", data);
-    // Handle registration logic here
+  const onSubmit = async (data) => {
+    console.log("Registering...", data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/register",
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+        }
+      );
+
+      console.log("Registration Success:", response.data);
+    } catch (error) {
+      console.error(
+        "Registration failed:",
+        error.response?.data?.message || error.message
+      );
+    }
   };
 
   return (
@@ -35,6 +53,15 @@ function Register() {
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput
+          type="text"
+          label="Name"
+          name="name"
+          register={register}
+          required={{ value: true, message: "Name is required" }}
+          error={errors.name}
+        />
+        <TextInput
+          type="email"
           label="Email"
           name="email"
           register={register}
