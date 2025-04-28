@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import TextInput from "../../components/Form/TextInput";
 import PasswordInput from "../../components/Form/PasswordInput";
 import SubmitButton from "../../components/Form/SubmitButton";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import FeedbackSnackbar from "../../components/FeedbackSnackbar";
 
 export default function Login() {
   const {
@@ -12,6 +14,20 @@ export default function Login() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  const showSnackbar = (message, severity = "success") => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
 
   const onSubmit = async (data) => {
     console.log("Logging in...", data);
@@ -25,10 +41,15 @@ export default function Login() {
         }
       );
       console.log("Login Success:", response.data);
+      showSnackbar("Login successful!", "success");
     } catch (error) {
       console.error(
         "Login failed:",
         error.response?.data?.message || error.message
+      );
+      showSnackbar(
+        `Login failed: ${error.response?.data?.message || error.message}`,
+        "error"
       );
     }
   };
@@ -63,6 +84,12 @@ export default function Login() {
         />
         <SubmitButton loading={isSubmitting}>Login</SubmitButton>
       </form>
+      <FeedbackSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
+      />
     </Container>
   );
 }

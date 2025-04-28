@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import TextInput from "../../components/Form/TextInput";
 import PasswordInput from "../../components/Form/PasswordInput";
 import SubmitButton from "../../components/Form/SubmitButton";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import FeedbackSnackbar from "../../components/FeedbackSnackbar";
 
 function Register() {
   const {
@@ -13,6 +15,20 @@ function Register() {
     watch,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  const showSnackbar = (message, severity = "success") => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
 
   const password = watch("password");
 
@@ -30,10 +46,17 @@ function Register() {
       );
 
       console.log("Registration Success:", response.data);
+      showSnackbar("Registration successful!", "success");
     } catch (error) {
       console.error(
         "Registration failed:",
         error.response?.data?.message || error.message
+      );
+      showSnackbar(
+        `Registration failed: ${
+          error.response?.data?.message || error.message
+        }`,
+        "error"
       );
     }
   };
@@ -85,6 +108,12 @@ function Register() {
         />
         <SubmitButton loading={isSubmitting}>Login</SubmitButton>
       </form>
+      <FeedbackSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
+      />
     </Container>
   );
 }
