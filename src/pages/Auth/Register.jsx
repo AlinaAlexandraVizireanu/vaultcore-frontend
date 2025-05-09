@@ -7,8 +7,10 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import FeedbackSnackbar from "../../components/FeedbackSnackbar";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -45,8 +47,14 @@ function Register() {
         }
       );
 
+      ///Storing the token
+      localStorage.setItem("token", response.token);
+
       console.log("Registration Success:", response.data);
       showSnackbar("Registration successful!", "success");
+
+      /// Redirect to home
+      navigate("/", { replace: true });
     } catch (error) {
       console.error(
         "Registration failed:",

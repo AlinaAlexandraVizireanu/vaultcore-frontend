@@ -7,8 +7,10 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import FeedbackSnackbar from "../../components/FeedbackSnackbar";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -41,7 +43,14 @@ export default function Login() {
         }
       );
       console.log("Login Success:", response.data);
+
+      ///Storing the token
+      localStorage.setItem("token", response.token);
+
       showSnackbar("Login successful!", "success");
+
+      /// Redirect to home
+      navigate("/", { replace: true });
     } catch (error) {
       console.error(
         "Login failed:",
