@@ -7,7 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 
-export default function Navbar() {
+export default function Navbar({ selectedStock }) {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
 
@@ -22,10 +22,6 @@ export default function Navbar() {
     navigate("/", { replace: true });
   };
 
-  const handleSearchSelect = (stock) => {
-    console.log("Selected stock:", stock);
-    // navigate(`/stocks/${stock.symbol}`)
-  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -54,7 +50,7 @@ export default function Navbar() {
                 },
               }}
             >
-              <SearchBar onSelect={handleSearchSelect} />
+              <SearchBar onSelect={selectedStock} />
             </Box>
           )}
           {token ? (
