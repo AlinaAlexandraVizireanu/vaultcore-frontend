@@ -50,6 +50,7 @@ export default function SearchBar({ onSelect }) {
           ? `${option.symbol} — ${option.name} — $${option.price}`
           : ""
       }
+      isOptionEqualToValue={(option, value) => option.symbol === value.symbol}
       loading={loading}
       onChange={(_, value) => {
         if (value) onSelect(value);
@@ -80,11 +81,16 @@ export default function SearchBar({ onSelect }) {
           }}
         />
       )}
-      renderOption={(props, option) => (
-        <li {...props} key={option.symbol}>
-          <strong>{option.symbol}</strong> — {option.name} — ${option.price}
-        </li>
-      )}
+      renderOption={(props, option, state) => {
+        const uniqueKey = `${option.symbol}-${state.index}`;
+        const { key, ...rest } = props;
+        return (
+          <li key={uniqueKey} {...rest}>
+            <strong>{option.symbol || "?"}</strong> — {option.name} — $
+            {option.price}
+          </li>
+        );
+      }}
     />
   );
 }
