@@ -7,7 +7,6 @@ const Layout = () => {
 
   function handleStockSelect(selectedStock) {
     setStock(selectedStock);
-    console.log("Selected:", selectedStock);
   }
 
   return (
