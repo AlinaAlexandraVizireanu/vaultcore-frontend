@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import StockSummaryCard from "../components/StockSummaryCard";
-import StockChart from "../components/StockChart";
+import ChartSwitcher from "../components/ChartSwitcher";
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,7 @@ import axios from "axios";
 export default function Home() {
   const { displayStock } = useOutletContext();
   const [chartData, setChartData] = useState([]);
+  const [candlesChartData, setCandlesChartData] = useState([]);
 
   useEffect(() => {
     if (!displayStock?.symbol) return;
@@ -25,7 +26,19 @@ export default function Home() {
       }
     };
 
+    const fetchCandleChartData = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3000/api/stocks/candlestick?symbol=${displayStock.symbol}`
+        );
+        setCandlesChartData(data);
+      } catch (err) {
+        console.error("Error fetching candles chart data:", err);
+        setCandlesChartData([]);
+      }
+    };
     fetchChartData();
+    fetchCandleChartData();
   }, [displayStock]);
 
   return (
@@ -41,7 +54,12 @@ export default function Home() {
           {displayStock && (
             <>
               <StockSummaryCard stockData={displayStock} />
-              <StockChart data={chartData} />
+              <ChartSwitcher
+                lineData={chartData}
+                candleData={candlesChartData}
+              />
+              {/* <StockChart data={chartData} /> */}
+              {/* <CandleChart data={candlesChartData} /> */}
             </>
           )}
         </Grid>
