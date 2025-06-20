@@ -45,7 +45,7 @@ export default function Login() {
       console.log("Login Success:", response.data);
 
       ///Storing the token
-      localStorage.setItem("token", response.token);
+      localStorage.setItem("token", response.data.token);
 
       showSnackbar("Login successful!", "success");
 

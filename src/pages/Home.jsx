@@ -58,8 +58,6 @@ export default function Home() {
                 lineData={chartData}
                 candleData={candlesChartData}
               />
-              {/* <StockChart data={chartData} /> */}
-              {/* <CandleChart data={candlesChartData} /> */}
             </>
           )}
         </Grid>
