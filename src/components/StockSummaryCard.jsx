@@ -17,10 +17,25 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import axios from "axios";
+import FeedbackSnackbar from "./FeedbackSnackbar";
 
 export default function StockSummaryCard({ stockData }) {
   const [showForm, setShowForm] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
   if (!stockData) return null;
+
+  const showSnackbar = (message, severity = "success") => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
 
   const {
     name,
@@ -78,12 +93,12 @@ export default function StockSummaryCard({ stockData }) {
                         },
                       }
                     );
+                    showSnackbar("Order submitted successfully!", "success");
                     handleOrderOnClose();
                   } catch (err) {
-                    console.error(
-                      "Order failed:",
-                      err.response?.data || err.message
-                    );
+                    const message =
+                      err.response?.data?.message || "Failed to submit order";
+                    showSnackbar(`Error: ${message}`, "error");
                   }
                 },
               },
@@ -164,6 +179,12 @@ export default function StockSummaryCard({ stockData }) {
           </Typography>
         </Box>
       </CardContent>
+      <FeedbackSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
+      />
     </Card>
   );
 }

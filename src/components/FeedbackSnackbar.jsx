@@ -13,7 +13,7 @@ export default function FeedbackSnackbar({ open, message, severity, onClose }) {
         onClose={onClose}
         severity={severity}
         sx={{ width: "100%" }}
-        variant="outlined"
+        variant="filled"
       >
         {message}
       </Alert>
