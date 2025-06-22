@@ -2,6 +2,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import StockSummaryCard from "../components/StockSummaryCard";
 import ChartSwitcher from "../components/ChartSwitcher";
+import PortfolioTable from "../components/PortfolioTable";
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import axios from "axios";
@@ -46,6 +47,7 @@ export default function Home() {
       <Grid container spacing={2}>
         {/* Left Column */}
         <Grid size={{ xs: 12, md: 6 }}>
+          <PortfolioTable />
           {/* Portfolio / Orders / Activity / News / Education components */}
         </Grid>
 
