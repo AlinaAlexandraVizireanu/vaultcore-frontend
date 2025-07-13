@@ -91,6 +91,8 @@ export default function Home() {
     const symbol = displayStock.symbol;
     const now = Date.now();
 
+    if (prevSymbolRef.current === symbol) return;
+
     const cachedChart = JSON.parse(
       localStorage.getItem(`chart_${symbol}`) || "{}"
     );
@@ -103,11 +105,7 @@ export default function Home() {
     const shouldUseCachedCandle =
       cachedCandle?.data && now - cachedCandle.timestamp < THIRTY_MINUTES;
 
-    if (
-      prevSymbolRef.current === symbol &&
-      shouldUseCachedChart &&
-      shouldUseCachedCandle
-    ) {
+    if (shouldUseCachedChart && shouldUseCachedCandle) {
       console.log(`Using cached charts for ${symbol}`);
       setChartData(cachedChart.data);
       setCandlesChartData(cachedCandle.data);
@@ -146,10 +144,23 @@ export default function Home() {
         setCandlesChartData([]);
       }
     };
-    prevSymbolRef.current = symbol;
-    if (!shouldUseCachedChart) fetchChartData();
-    if (!shouldUseCachedCandle) fetchCandleChartData();
-  }, [displayStock]);
+    const loadCharts = async () => {
+      if (shouldUseCachedChart) {
+        setChartData(cachedChart.data);
+      } else {
+        await fetchChartData();
+      }
+
+      if (shouldUseCachedCandle) {
+        setCandlesChartData(cachedCandle.data);
+      } else {
+        await fetchCandleChartData();
+      }
+      prevSymbolRef.current = symbol;
+    };
+
+    loadCharts();
+  }, [displayStock?.symbol]);
 
   return (
     <Container maxWidth="xl" sx={{ mt: 4 }}>
