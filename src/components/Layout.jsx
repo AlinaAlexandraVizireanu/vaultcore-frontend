@@ -12,7 +12,9 @@ const Layout = () => {
   return (
     <>
       <Navbar selectedStock={handleStockSelect} />
-      <Outlet context={{ displayStock: stock }} />
+      <Outlet
+        context={{ displayStock: stock, setDisplayStock: handleStockSelect }}
+      />
     </>
   );
 };

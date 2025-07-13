@@ -10,46 +10,17 @@ import {
   CircularProgress,
   Box,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-export default function PortfolioTable() {
-  const [portfolio, setPortfolio] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+export default function PortfolioTable({ enrichAndSetStock, portfolio }) {
+  const handleRowClick = async (userStock) => {
+    await enrichAndSetStock(userStock);
+  };
 
-  useEffect(() => {
-    const fetchPortfolio = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/stocks/portfolio", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        setPortfolio(response.data);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load portfolio");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPortfolio();
-  }, []);
-
-  if (loading)
+  if (!portfolio)
     return (
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
         <CircularProgress />
       </Box>
-    );
-
-  if (error)
-    return (
-      <Typography color="error" align="center" mt={4}>
-        {error}
-      </Typography>
     );
 
   if (portfolio.length === 0)
@@ -80,7 +51,12 @@ export default function PortfolioTable() {
         </TableHead>
         <TableBody>
           {portfolio.map((stock) => (
-            <TableRow key={stock._id}>
+            <TableRow
+              key={stock._id}
+              hover
+              sx={{ cursor: "pointer" }}
+              onClick={() => handleRowClick(stock)}
+            >
               <TableCell>{stock.symbol}</TableCell>
               <TableCell>{stock.name}</TableCell>
               <TableCell align="right">{stock.quantity}</TableCell>

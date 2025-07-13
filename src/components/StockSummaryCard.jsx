@@ -19,7 +19,7 @@ import { useState } from "react";
 import axios from "axios";
 import FeedbackSnackbar from "./FeedbackSnackbar";
 
-export default function StockSummaryCard({ stockData }) {
+export default function StockSummaryCard({ stockData, fetchPortfolio }) {
   const [showForm, setShowForm] = useState(false);
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -94,6 +94,7 @@ export default function StockSummaryCard({ stockData }) {
                       }
                     );
                     showSnackbar("Order submitted successfully!", "success");
+                    await fetchPortfolio();
                     handleOrderOnClose();
                   } catch (err) {
                     const message =
