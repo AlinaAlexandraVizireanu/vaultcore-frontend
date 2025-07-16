@@ -1,5 +1,8 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 import StockSummaryCard from "../components/StockSummaryCard";
 import ChartSwitcher from "../components/ChartSwitcher";
 import PortfolioTable from "../components/PortfolioTable";
@@ -12,9 +15,13 @@ export default function Home() {
   const [chartData, setChartData] = useState([]);
   const [candlesChartData, setCandlesChartData] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
+  const [tabIndex, setTabIndex] = useState(0);
+
   const prevSymbolRef = useRef(null);
 
   const THIRTY_MINUTES = 30 * 60 * 1000;
+
+  const handleTabChange = (_, newValue) => setTabIndex(newValue);
 
   const enrichAndSetStock = async (userStock) => {
     const cacheKey = `stock_${userStock.symbol}`;
@@ -167,11 +174,25 @@ export default function Home() {
       <Grid container spacing={2}>
         {/* Left Column */}
         <Grid size={{ xs: 12, md: 6 }}>
-          <PortfolioTable
-            enrichAndSetStock={enrichAndSetStock}
-            portfolio={portfolio}
-          />
-          {/* Portfolio / Orders / Activity / News / Education components */}
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Tabs value={tabIndex} onChange={handleTabChange}>
+              <Tab label="Portfolio" />
+              <Tab label="Orders" />
+              <Tab label="News" />
+              <Tab label="Education" />
+            </Tabs>
+          </Box>
+          {tabIndex === 0 && (
+            <PortfolioTable
+              enrichAndSetStock={enrichAndSetStock}
+              portfolio={portfolio}
+            />
+          )}
+          {tabIndex === 1 && <Box sx={{ p: 2 }}>Orders content here</Box>}
+          {tabIndex === 2 && <Box sx={{ p: 2 }}>News content here</Box>}
+          {tabIndex === 3 && <Box sx={{ p: 2 }}>Education content here</Box>}
+
+          {/* Portfolio / Orders / News / Education components */}
         </Grid>
 
         {/* Right Column */}
