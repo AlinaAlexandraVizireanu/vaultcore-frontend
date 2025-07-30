@@ -3,12 +3,16 @@ import Grid from "@mui/material/Grid";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import StockSummaryCard from "../components/StockSummaryCard";
 import ChartSwitcher from "../components/ChartSwitcher";
 import PortfolioTable from "../components/PortfolioTable";
 import { useRef, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import CardInfo from "../components/CardInfo";
 import axios from "axios";
+import GettingStarted from "../components/GettingStarted";
 
 export default function Home() {
   const { displayStock, setDisplayStock } = useOutletContext();
@@ -16,6 +20,7 @@ export default function Home() {
   const [candlesChartData, setCandlesChartData] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const prevSymbolRef = useRef(null);
 
@@ -190,7 +195,74 @@ export default function Home() {
           )}
           {tabIndex === 1 && <Box sx={{ p: 2 }}>Orders content here</Box>}
           {tabIndex === 2 && <Box sx={{ p: 2 }}>News content here</Box>}
-          {tabIndex === 3 && <Box sx={{ p: 2 }}>Education content here</Box>}
+          {tabIndex === 3 &&
+            (!selectedCard ? (
+              <Box
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 3,
+                }}
+              >
+                <CardInfo
+                  title="Getting started"
+                  image="src/assets/gettingstarted.png"
+                  text="Learn the basics of investing, how the stock market works, and what you need to begin your journey."
+                  onClick={() => setSelectedCard("Getting started")}
+                />
+                <CardInfo
+                  title="Strategies"
+                  image="src/assets/strategies.png"
+                  text="Explore proven investment strategies to grow your portfolio with confidence and clarity."
+                  onClick={() => setSelectedCard("Strategies")}
+                />
+                <CardInfo
+                  title="Glossary"
+                  image="src/assets/glossary.png"
+                  text="Understand key financial and market terms so you can navigate investing like a pro."
+                  onClick={() => setSelectedCard("Glossary")}
+                />
+                <CardInfo
+                  title="How to use this App"
+                  image="src/assets/howtousetheapp.png"
+                  text="Step-by-step guide on using all the app features — from searching stocks to managing your portfolio."
+                  onClick={() => setSelectedCard("How to use this App")}
+                />
+              </Box>
+            ) : (
+              <Box sx={{ p: 2 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => setSelectedCard(null)}
+                  sx={{ mb: 2 }}
+                >
+                  Back
+                </Button>
+
+                {selectedCard === "Getting started" && <GettingStarted />}
+                {selectedCard === "Strategies" && (
+                  <Typography>
+                    Dive into common strategies like value investing, growth
+                    investing, index investing, and more.
+                  </Typography>
+                )}
+                {selectedCard === "Glossary" && (
+                  <Typography>
+                    Explore an A-Z list of important stock market terms and
+                    definitions.
+                  </Typography>
+                )}
+                {selectedCard === "How to use this App" && (
+                  <Typography>
+                    This guide walks you through the app — how to search for
+                    stocks, place buy/sell orders, view your portfolio, and
+                    more.
+                  </Typography>
+                )}
+              </Box>
+            ))}
 
           {/* Portfolio / Orders / News / Education components */}
         </Grid>
