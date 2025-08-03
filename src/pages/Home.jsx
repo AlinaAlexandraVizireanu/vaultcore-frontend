@@ -14,6 +14,7 @@ import CardInfo from "../components/CardInfo";
 import axios from "axios";
 import GettingStarted from "../components/GettingStarted";
 import Strategies from "../components/Strategies";
+import Glossary from "../components/Glossary";
 
 export default function Home() {
   const { displayStock, setDisplayStock } = useOutletContext();
@@ -244,12 +245,7 @@ export default function Home() {
 
                 {selectedCard === "Getting started" && <GettingStarted />}
                 {selectedCard === "Strategies" && <Strategies />}
-                {selectedCard === "Glossary" && (
-                  <Typography>
-                    Explore an A-Z list of important stock market terms and
-                    definitions.
-                  </Typography>
-                )}
+                {selectedCard === "Glossary" && <Glossary />}
                 {selectedCard === "How to use this App" && (
                   <Typography>
                     This guide walks you through the app — how to search for
