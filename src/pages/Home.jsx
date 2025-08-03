@@ -13,6 +13,7 @@ import { useOutletContext } from "react-router-dom";
 import CardInfo from "../components/CardInfo";
 import axios from "axios";
 import GettingStarted from "../components/GettingStarted";
+import Strategies from "../components/Strategies";
 
 export default function Home() {
   const { displayStock, setDisplayStock } = useOutletContext();
@@ -242,12 +243,7 @@ export default function Home() {
                 </Button>
 
                 {selectedCard === "Getting started" && <GettingStarted />}
-                {selectedCard === "Strategies" && (
-                  <Typography>
-                    Dive into common strategies like value investing, growth
-                    investing, index investing, and more.
-                  </Typography>
-                )}
+                {selectedCard === "Strategies" && <Strategies />}
                 {selectedCard === "Glossary" && (
                   <Typography>
                     Explore an A-Z list of important stock market terms and

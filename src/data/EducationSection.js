@@ -5,42 +5,50 @@ export const educationSections = {
       {
         heading: "What Is Investing?",
         body: "Investing means putting your money into assets like stocks or bonds with the goal of growing it over time. Unlike saving, investing involves some risk but offers the potential for greater returns.",
-        videoUrl: "https://www.youtube.com/embed/I81xqr8HzBE?si=RVVYkLeXxXzvp4kZ",
+        videoUrl:
+          "https://www.youtube.com/embed/I81xqr8HzBE?si=RVVYkLeXxXzvp4kZ",
       },
       {
         heading: "How the Stock Market Works",
         body: "The stock market is a place where shares of companies are bought and sold. It connects investors who want to buy stocks with those who want to sell them, and prices are determined by supply and demand.",
-        videoUrl: "https://www.youtube.com/embed/p7HKvqRI_Bo?si=Fwq4NhfeQaW2ZG9E",
+        videoUrl:
+          "https://www.youtube.com/embed/p7HKvqRI_Bo?si=Fwq4NhfeQaW2ZG9E",
       },
       {
         heading: "Common Types of Investments",
         body: "Investors can choose from assets like stocks, bonds, ETFs, and mutual funds. Each type carries different levels of risk and return potential.",
-        videoUrl: "https://www.youtube.com/embed/Z-Gdqwm-BsQ?si=o74X1geO7-kpbelt",
+        videoUrl:
+          "https://www.youtube.com/embed/Z-Gdqwm-BsQ?si=o74X1geO7-kpbelt",
       },
       {
         heading: "What You Need to Start Investing",
         body: "To begin investing, you'll need a brokerage account, some capital (even a small amount), and a willingness to learn. You can start with real money or use a simulator to practice.",
-        videoUrl: "https://www.youtube.com/embed/dbDijzEgo7E?si=L7BUnoBgeUJqqNYh",
+        videoUrl:
+          "https://www.youtube.com/embed/dbDijzEgo7E?si=L7BUnoBgeUJqqNYh",
       },
       {
         heading: "Types of Investors",
         body: "Investors may be long-term (holding for years) or short-term (trading frequently). Some prefer passive strategies, while others are more active in managing their portfolios.",
-        videoUrl: "https://www.youtube.com/embed/DqPM33vrKrE?si=NUoIf5KeHo144WPJ",
+        videoUrl:
+          "https://www.youtube.com/embed/DqPM33vrKrE?si=NUoIf5KeHo144WPJ",
       },
       {
         heading: "Understanding Risk and Reward",
         body: "All investments come with some risk. Generally, higher potential returns come with higher risk. It's important to find a balance that fits your goals and risk tolerance.",
-        videoUrl: "https://www.youtube.com/embed/aKZsireNBIM?si=OJbNvGKW2ljEg-hy",
+        videoUrl:
+          "https://www.youtube.com/embed/aKZsireNBIM?si=OJbNvGKW2ljEg-hy",
       },
       {
         heading: "Setting Your First Financial Goals",
         body: "Before investing, define your goals—whether it's saving for retirement, buying a house, or building wealth. Your goals will shape your investment strategy.",
-        videoUrl: "https://www.youtube.com/embed/Duxo4xXeMec?si=mtYuKbUd6lRBhoxo",
+        videoUrl:
+          "https://www.youtube.com/embed/Duxo4xXeMec?si=mtYuKbUd6lRBhoxo",
       },
       {
         heading: "Myths About Investing",
         body: "Many believe you need a lot of money or expertise to start investing. The truth is, anyone can begin with small amounts and grow by learning over time.",
-        videoUrl: "https://www.youtube.com/embed/3KaBPo9riu8?si=-sScY7_zGY_IDyGE",
+        videoUrl:
+          "https://www.youtube.com/embed/3KaBPo9riu8?si=-sScY7_zGY_IDyGE",
       },
     ],
   },
@@ -50,35 +58,43 @@ export const educationSections = {
     content: [
       {
         heading: "Buy and Hold",
-        body: "This long-term strategy involves buying stocks and holding them for years. It relies on the idea that markets grow over time despite short-term fluctuations.",
+        body: "Buy and hold is a long-term investment strategy where investors purchase stocks and keep them for years, ignoring short-term market fluctuations. It’s based on the idea that markets generally rise over time.",
+        videoUrl: "https://www.youtube.com/embed/cNOsE7p8DRw?si=T0Ckkjmw4y6eyiag",
       },
       {
         heading: "Dollar-Cost Averaging",
-        body: "With this approach, you invest a fixed amount at regular intervals. This reduces the impact of market volatility and avoids trying to time the market.",
+        body: "Dollar-cost averaging means investing a fixed amount of money at regular intervals, regardless of market conditions. This helps reduce the impact of market volatility and removes the pressure of trying to time the market.",
+        videoUrl: "https://www.youtube.com/embed/zA44IGc5fLM?si=lwRybXhbwBYKALqP",
       },
       {
         heading: "Growth vs. Value Investing",
-        body: "Growth investors seek companies expected to grow rapidly, while value investors look for undervalued stocks that may be trading below their true worth.",
+        body: "Growth investing focuses on companies expected to grow faster than average, often trading at higher valuations. Value investing targets companies that appear undervalued by the market, offering potential for price appreciation.",
+        videoUrl: "https://www.youtube.com/embed/a8UVMBStZFA?si=Yz5xmjM7Qaz_YQNB",
       },
       {
         heading: "Dividend Investing",
-        body: "This strategy focuses on buying stocks that regularly pay dividends. It can provide a steady income stream and potential capital appreciation.",
+        body: "Dividend investing involves buying stocks that regularly pay dividends. Investors receive income from the dividends and may also benefit from the stock’s price appreciation over time.",
+        videoUrl: "https://www.youtube.com/embed/kjeosZuC7Uw?si=bLX0rhBEfKW0l0Uf",
       },
       {
         heading: "Index Fund Investing",
-        body: "Investing in index funds allows you to buy a broad slice of the market, such as the S&P 500. It's a low-cost, diversified strategy ideal for beginners.",
+        body: "Index fund investing is a passive strategy where investors buy funds that track a market index like the S&P 500. It provides broad market exposure, low costs, and reliable long-term returns.",
+        videoUrl: "https://www.youtube.com/embed/o5u9CHPmIW0?si=SD3pD0Y6xgjTLoz-",
       },
       {
         heading: "Technical vs. Fundamental Analysis",
-        body: "Fundamental analysis focuses on a company’s financial health and performance, while technical analysis studies price patterns and market behavior.",
+        body: "Fundamental analysis involves evaluating a company’s financials, management, and market position. Technical analysis focuses on charts and price patterns to predict future movements.",
+        videoUrl: "https://www.youtube.com/embed/AhDxXNNv7bk?si=-_xtLAbgb-ute4xi",
       },
       {
         heading: "Portfolio Diversification",
-        body: "Diversifying means spreading your investments across various assets to reduce risk. A diversified portfolio is less likely to be heavily affected by a single asset’s performance.",
+        body: "Diversification means spreading your investments across different asset types, sectors, or regions to reduce risk. A well-diversified portfolio is less affected by the poor performance of a single investment.",
+        videoUrl: "https://www.youtube.com/embed/Pmlsa5-ruMk?si=6Ouml9usNOwbshWp",
       },
       {
         heading: "Risk Management Strategies",
-        body: "Good investors manage risk through diversification, stop-loss orders, and understanding their personal risk tolerance. Managing risk is key to long-term success.",
+        body: "Good investing includes managing risk through diversification, stop-loss orders, setting clear goals, and understanding your risk tolerance. Avoiding emotional decisions is also key to long-term success.",
+        videoUrl: "https://www.youtube.com/embed/QGzgsSXdPjo?si=js6BFI43vKDUlQr-",
       },
     ],
   },
