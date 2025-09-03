@@ -15,12 +15,14 @@ import axios from "axios";
 import GettingStarted from "../components/GettingStarted";
 import Strategies from "../components/Strategies";
 import Glossary from "../components/Glossary";
+import OrdersTable from "../components/OrdersTable";
 
 export default function Home() {
   const { displayStock, setDisplayStock } = useOutletContext();
   const [chartData, setChartData] = useState([]);
   const [candlesChartData, setCandlesChartData] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [tabIndex, setTabIndex] = useState(0);
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -89,6 +91,23 @@ export default function Home() {
       console.error("Failed to fetch portfolio:", err);
     }
   };
+
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/stocks/orders",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setOrders(response.data);
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
+  };
+
   useEffect(() => {
     if (displayStock?.symbol) {
       console.log("Updated displayStock with enriched data:", displayStock);
@@ -97,6 +116,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchPortfolio();
+    fetchOrders();
   }, []);
 
   useEffect(() => {
@@ -195,7 +215,11 @@ export default function Home() {
               portfolio={portfolio}
             />
           )}
-          {tabIndex === 1 && <Box sx={{ p: 2 }}>Orders content here</Box>}
+          {tabIndex === 1 && (
+            <Box sx={{ p: 2 }}>
+              <OrdersTable orders={orders} />
+            </Box>
+          )}
           {tabIndex === 2 && <Box sx={{ p: 2 }}>News content here</Box>}
           {tabIndex === 3 &&
             (!selectedCard ? (
