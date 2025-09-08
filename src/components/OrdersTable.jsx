@@ -7,22 +7,12 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { format } from "date-fns";
 
 export default function OrdersTable({ orders }) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ maxHeight: 550 }}>
+      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="sticky table">
         <TableHead>
           <TableRow>
             <TableCell>Type</TableCell>
@@ -42,7 +32,9 @@ export default function OrdersTable({ orders }) {
               <TableCell component="th" scope="row">
                 {order.transactionType}
               </TableCell>
-              <TableCell align="right">{order.date}</TableCell>
+              <TableCell align="right">
+                {format(order.date, "MM/dd/yyyy HH:mm")}
+              </TableCell>
               <TableCell align="right">{order.symbol}</TableCell>
               <TableCell align="right">{order.quantity}</TableCell>
               <TableCell align="right">{order.totalValue}</TableCell>
